@@ -1,33 +1,34 @@
 <template>
-  <div>
-  </div>
+  <v-app dark>
+    <Header />
+    <v-main>
+      <nuxt />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
+import Header from '@/layouts/sections/Header'
+
 export default {
-  name: 'DefaultLayout',
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+  components: {
+    Header
+  },
+  mounted () {
+    // this.getMenu()
+  },
+  methods: {
+    async getMenu () {
+      console.log('getMenu')
+      // const menus = await this.$axios.$get('menu')
+      // this.menus = menus
     }
   }
 }
 </script>
+
+<style>
+.container {
+  max-width: 1170px;
+}
+</style>
