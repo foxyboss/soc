@@ -67,6 +67,7 @@ export default {
   },
 
   router: {
-    base: '/soc/'
+    base: '/soc/',
+    prefetchLinks: false
   }
 }
