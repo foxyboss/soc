@@ -7,7 +7,7 @@
             class="mr-5"
             width="60px"
             :src="require('@/assets/images/logos/soc-logo.png')"
-            alt="logo"
+            alt="CannaSociety Logo"
           >
         </li>
       </ul>
