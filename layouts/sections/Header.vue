@@ -12,16 +12,14 @@
           <v-spacer />
 
           <!-- Menu for small devices -->
-          <client-only>
-            <v-btn
-              class="d-block d-md-none"
-              color="white"
-              text
-              @click="toggleClass()"
-            >
-              <v-app-bar-nav-icon class="white--text" />
-            </v-btn>
-          </client-only>
+          <v-btn
+            class="d-block d-md-none"
+            color="white"
+            text
+            @click="toggleClass()"
+          >
+            <v-app-bar-nav-icon class="white--text" />
+          </v-btn>
 
           <!-- Desktop view Navigation -->
           <div
