@@ -1,16 +1,17 @@
 <template>
   <v-container class="container py-0 fill-height">
-    Home
+    <article>
+      <nuxt-content :document="article" />
+    </article>
   </v-container>
 </template>
 
 <script>
 export default {
-  async asyncData ({ $content, params }) {
-    // const article = await $content('index').fetch()
-    // let tmpArticle = { article }
+  async asyncData ({ $content }) {
+    const article = await $content('index').fetch()
 
-    // return { article }
+    return { article }
   }
 }
 </script>
