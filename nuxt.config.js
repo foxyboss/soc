@@ -22,9 +22,22 @@ export default {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  /**
+   * Global CSS: https://go.nuxtjs.dev/config-css
+   */
   css: [
+    '~/assets/scss/style.scss'
   ],
+
+  /**
+   * Customize the progress-bar color
+   */
+  loading: {
+    color: "DodgerBlue",
+    height: "5px",
+    continuous: true,
+    duration: 3000
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -45,19 +58,13 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/variables.scss'],
+    optionsPath: "./vuetify.options.js",
+    treeShake: true,
     theme: {
       dark: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
+      options: {
+        customProperties: true
       }
     }
   },
@@ -66,8 +73,19 @@ export default {
   build: {
   },
 
+  /**
+   * Customize router options for different environments
+   * https://hikari-blog.com/nuxtjs-github-pages/
+   */
   router: {
     base: '/soc/',
     prefetchLinks: false
+  },
+
+  watchers: {
+    webpack: {
+      aggregateTimeout: 1000,
+      poll: 1000
+    }
   }
 }
