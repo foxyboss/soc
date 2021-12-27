@@ -6,7 +6,7 @@
           <img
             class="mr-5"
             width="60px"
-            :src="require('@/assets/images/logos/1731337-e91e63.png')"
+            :src="require('@/assets/images/logos/soc-logo.png')"
             alt="logo"
           >
         </li>
