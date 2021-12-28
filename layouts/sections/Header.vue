@@ -1,14 +1,48 @@
 <template>
   <div>
     <v-app-bar
-      dense
-      dark
+      app
+      class="app-header position-relative bg-dark header2"
     >
-      <template v-slot:extension>
-        <tabs>
-          <v-tabs>Home</v-tabs>
-        </tabs>
-      </template>
+      <v-container class="py-0 fill-height">
+          <!-- Logo -->
+          <Logo />
+
+          <v-spacer />
+
+          <!-- Menu for small devices -->
+          <v-btn
+            class="d-block d-md-none"
+            color="white"
+            text
+            @click="toggleClass()"
+          >
+            <v-app-bar-nav-icon class="white--text" />
+          </v-btn>
+
+          <!-- Desktop view Navigation -->
+          <div
+            class="navigation"
+            :class="[isActive ? 'd-block' : '']"
+            @click="isActive = !isActive"
+          >
+            <ul class="navbar-nav">
+              <li
+                v-for="(menu, i) in menus"
+                :key="i"
+                class="nav-item"
+                text
+              >
+                <NuxtLink
+                  class="nav-link"
+                  :to="menu.url"
+                >
+                  {{ menu.title }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
+      </v-container>
     </v-app-bar>
   </div>
 </template>
