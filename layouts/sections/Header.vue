@@ -5,82 +5,86 @@
       class="app-header position-relative bg-dark header2"
     >
       <v-container class="py-0 fill-height">
-          <!-- Logo -->
-          <Logo />
+        <!-- Logo -->
+        <Logo />
 
-          <v-spacer />
+        <v-spacer />
 
-          <!-- Menu for small devices -->
-          <client-only>
-            <v-btn
-              class="d-block d-md-none"
-              color="white"
-              text
-              @click="toggleClass()"
+        <!-- Desktop view Navigation -->
+        <div>
+          <v-row class="d-none d-md-block">
+            <v-menu
+              v-for="(menu, i) in menus"
+              :key="i"
+              open-on-hover
+              offset-y
             >
-              <v-app-bar-nav-icon class="white--text" />
-            </v-btn>
-          </client-only>
-
-          <!-- Desktop view Navigation -->
-          <div
-            class="navigation"
-            :class="[isActive ? 'd-block' : '']"
-            @click="isActive = !isActive"
-          >
-            <v-row class="d-none d-md-block">
-              <v-menu
-                v-for="(menu, i) in menus"
-                :key="i"
-                open-on-hover
-                offset-y
-              >
-                <!-- Main Menu -->
-                <template v-slot:activator="{ attrs, on }">
-                  <v-btn
-                    class="white--text ma-1"
-                    :to="menu.url"
-                    text
-                    tile
-                    plain
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    {{ menu.title }}
-                  </v-btn>
-                </template>
-
-                <!-- Submenu -->
-                <v-list>
-                  <v-list-item
-                    v-for="(item, index) in menu.items"
-                    :key="index"
-                    link
-                    :to="item.url"
-                  >
-                    <v-list-item-title v-text="item.title" />
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-row>
-            <ul class="navbar-nav d-md-none">
-              <li
-                v-for="(menu, i) in menus"
-                :key="i"
-                class="nav-item"
-                text
-              >
-                <NuxtLink
-                  class="nav-link"
+              <!-- Main Menu -->
+              <template v-slot:activator="{ attrs, on }">
+                <v-btn
+                  class="white--text ma-1"
                   :to="menu.url"
+                  text
+                  tile
+                  plain
+                  v-bind="attrs"
+                  v-on="on"
                 >
                   {{ menu.title }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
+                </v-btn>
+              </template>
+
+              <!-- Submenu -->
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in menu.items"
+                  :key="index"
+                  link
+                  :to="item.url"
+                >
+                  <v-list-item-title v-text="item.title" />
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-row>
+        </div>
+        
+        <v-app-bar-nav-icon class="d-md-none" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-container>
     </v-app-bar>
+    <v-navigation-drawer
+      class="d-md-none"
+      v-model="drawer"
+      absolute
+      right
+      temporary
+    >
+      <v-list>
+        <v-list-group
+          v-for="(menu, i) in menus"
+          :key="i"
+          active-class="deep-purple--text text--accent-4"
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-title>
+              {{ menu.title }}
+            </v-list-item-title>
+          </template>
+          <!-- <v-list-item-title></v-list-item-title> -->
+          <!-- <v-list-item>
+          </v-list-item> -->
+            
+          <v-list-item
+            v-for="(item, index) in menu.items"
+            :key="index"
+            :to="item.url"
+          >
+            <v-list-item-title v-text="item.title" />
+          </v-list-item>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -95,6 +99,7 @@ export default {
   },
   data: () => ({
     isActive: false,
+    drawer: false,
     menus: [
       {
         title: 'The plant',
